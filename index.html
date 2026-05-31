@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trailer Park Fantasies — Interactive Reader & Studio</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons for premium interactive elements -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Ambient Sound Deck (Overlay widget) -->
+  <div class="audio-tape-deck glassmorphism">
+    <div class="deck-header">
+      <i class="ph-bold ph-cassette-tape"></i>
+      <span>Bayou Ambient Player</span>
+      <button class="deck-toggle-btn" id="deck-toggle-btn"><i class="ph-bold ph-caret-down"></i></button>
+    </div>
+    <div class="deck-body" id="deck-body">
+      <div class="cassette-graphic">
+        <div class="spindle left-spindle"></div>
+        <div class="tape-reel"></div>
+        <div class="spindle right-spindle"></div>
+      </div>
+      <div class="track-info">
+        <div class="track-title" id="current-track-title">Soundtrack Stopped</div>
+        <div class="track-timer" id="track-timer">00:00</div>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-btn" id="audio-prev" title="Previous Track"><i class="ph-fill ph-skip-back"></i></button>
+        <button class="audio-btn play" id="audio-play" title="Play/Pause"><i class="ph-fill ph-play"></i></button>
+        <button class="audio-btn" id="audio-stop" title="Stop"><i class="ph-fill ph-stop"></i></button>
+        <button class="audio-btn" id="audio-next" title="Next Track"><i class="ph-fill ph-skip-forward"></i></button>
+      </div>
+      <div class="volume-slider-container">
+        <i class="ph-bold ph-speaker-high"></i>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5">
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Layer (Vibrant gradient and bayou atmosphere) -->
+  <div class="bayou-background">
+    <div class="gradient-glow-1"></div>
+    <div class="gradient-glow-2"></div>
+    <div class="string-lights">
+      <div class="bulb red"></div>
+      <div class="bulb blue"></div>
+      <div class="bulb gold"></div>
+      <div class="bulb rose"></div>
+      <div class="bulb turquoise"></div>
+      <div class="bulb red"></div>
+      <div class="bulb blue"></div>
+      <div class="bulb gold"></div>
+      <div class="bulb rose"></div>
+      <div class="bulb turquoise"></div>
+    </div>
+  </div>
+
+  <!-- Application Shell -->
+  <div class="app-container">
+    
+    <!-- Top Glassmorphic Navigation -->
+    <header class="app-header glassmorphism">
+      <div class="logo-area">
+        <div class="logo-title">TRAILER PARK FANTASIES</div>
+        <div class="logo-subtitle">Luxury Living at Affordable Prices</div>
+      </div>
+      
+      <nav class="app-nav">
+        <button class="nav-tab active" data-tab="reader-view">
+          <i class="ph-bold ph-book-open"></i> Graphic Novel Reader
+        </button>
+        <button class="nav-tab" data-tab="studio-view">
+          <i class="ph-bold ph-pencil-line"></i> Production Studio
+        </button>
+      </nav>
+    </header>
+    
+    <!-- Main Content Panel -->
+    <main class="app-main">
+      
+      <!-- VIEW 1: Digital Book Reader -->
+      <section class="tab-content active" id="reader-view">
+        <div class="reader-layout">
+          
+          <!-- Sidebar Book Navigation -->
+          <div class="book-sidebar glassmorphism">
+            <h3 class="sidebar-title"><i class="ph-bold ph-list-numbers"></i> Chapter List</h3>
+            <div class="chapter-links" id="sidebar-chapter-list">
+              <!-- Rendered dynamically -->
+            </div>
+            
+            <div class="reader-stats-card">
+              <h4>Compilation Info</h4>
+              <p><i class="ph-bold ph-file-html"></i> Output: <span class="stats-val">graphic_novel_final.html</span></p>
+              <p><i class="ph-bold ph-columns"></i> Total Pages: <span class="stats-val" id="stats-total-pages">14 / 150</span></p>
+              <p><i class="ph-bold ph-check-circle"></i> Chapter 1 Status: <span class="stats-val tag-success">100% Locked</span></p>
+            </div>
+          </div>
+          
+          <!-- Dynamic Book Viewer -->
+          <div class="book-container">
+            <div class="book-sheet glassmorphism" id="book-sheet">
+              <!-- Book pages are injected here dynamically in JS -->
+              
+              <!-- Loader State -->
+              <div class="book-loader">
+                <i class="ph-bold ph-spinner-gap spin"></i>
+                <p>Loading Chapter 1 Manuscript...</p>
+              </div>
+            </div>
+            
+            <!-- Book Controls -->
+            <div class="book-controls">
+              <button class="control-btn" id="book-prev-btn" disabled>
+                <i class="ph-bold ph-arrow-left"></i> Previous Page
+              </button>
+              <div class="page-indicator" id="book-page-indicator">
+                Page <span id="current-page-num">1</span> of <span id="total-page-num">12</span>
+              </div>
+              <button class="control-btn" id="book-next-btn">
+                Next Page <i class="ph-bold ph-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- VIEW 2: Production Studio & Workspace -->
+      <section class="tab-content" id="studio-view">
+        <div class="studio-layout">
+          
+          <!-- Workspace Navigation -->
+          <div class="studio-sidebar glassmorphism">
+            <button class="studio-menu-item active" data-subtab="bible-section">
+              <i class="ph-bold ph-scroll"></i> Series Production Bible
+            </button>
+            <button class="studio-menu-item" data-subtab="timeline-section">
+              <i class="ph-bold ph-calendar"></i> Chapters & Beat Sheet
+            </button>
+            <button class="studio-menu-item" data-subtab="auditor-section">
+              <i class="ph-bold ph-shield-check"></i> Continuity Guardrails Auditor
+            </button>
+            <button class="studio-menu-item" data-subtab="compiler-section">
+              <i class="ph-bold ph-terminal-window"></i> Novel Compiler Console
+            </button>
+          </div>
+          
+          <!-- Workspace Details Content -->
+          <div class="studio-content-area glassmorphism">
+            
+            <!-- Workspace Tab 1: Series Production Bible -->
+            <div class="studio-subtab active" id="bible-section">
+              <div class="bible-container">
+                <div class="bible-header">
+                  <h2><i class="ph-bold ph-scroll"></i> Series Production Bible</h2>
+                  <div class="search-bar-container">
+                    <i class="ph-bold ph-magnifying-glass"></i>
+                    <input type="text" id="bible-search" placeholder="Search characters, settings, guardrails...">
+                  </div>
+                </div>
+                
+                <div class="bible-tabs">
+                  <button class="bible-tab-btn active" data-bible="summary">Introduction</button>
+                  <button class="bible-tab-btn" data-bible="characters">Core Cast & Cards</button>
+                  <button class="bible-tab-btn" data-bible="setting">Setting & Map</button>
+                  <button class="bible-tab-btn" data-bible="rules">Guardrails</button>
+                </div>
+                
+                <div class="bible-tab-content active" id="bible-summary">
+                  <!-- Distilled intro content -->
+                  <div class="distilled-intro-card">
+                    <h3>DISTILLED CANON CONTEXT</h3>
+                    <p class="tagline">"She doesn't solve mysteries. She corrects the record."</p>
+                    <p class="summary-text">
+                      A medically trained, forensically seasoned trailer-park detective investigates a neighbor's disappearance and uncovers a land-grab conspiracy threatening her community — Southern-Gothic and slow-burn, but funny, warm, and full of people who think they're living their most glamorous life and have no idea how ridiculous they are. <strong>Trailer chic.</strong>
+                    </p>
+                    <div class="intro-grid">
+                      <div class="intro-grid-card">
+                        <h4>Tone Rules</h4>
+                        <ul>
+                          <li>Atmospheric Southern-Gothic + Camp Humor + Heart</li>
+                          <li>Slow-burn Brooke & Teepop marriage deepening under pressure</li>
+                          <li>Found-family warmth & non-linear trauma healing</li>
+                        </ul>
+                      </div>
+                      <div class="intro-grid-card">
+                        <h4>Investigation Engine</h4>
+                        <ul>
+                          <li><strong>Brooke</strong> reads human truth</li>
+                          <li><strong>Rena</strong> checks forensic truth</li>
+                          <li><strong>Teepop</strong> checks legal/tech truth</li>
+                          <li><strong>Sheila/Ricky</strong> accidentally supply keys</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bible-tab-content" id="bible-characters">
+                  <!-- Gorgeous character cards with images -->
+                  <div class="characters-grid">
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <img src="art/key_art.png" alt="Brooke Bug Barnett">
+                        <div class="char-tag">Protagonist</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Brooke "Bug" Barnett</h3>
+                        <p class="char-title-desc">Unofficial Truth-Finder / Ex-Nurse</p>
+                        <hr>
+                        <p class="char-detail"><strong>Public Face:</strong> Trailer-chic Sherlock, cowboy boots, bee tattoo, turquoise statements, long duster.</p>
+                        <p class="char-detail"><strong>Superpower:</strong> Hyper-awareness of changes (too-clean rooms, crooked trucks, discrepancies).</p>
+                        <p class="char-detail"><strong>Wound:</strong> Grew up in Eret with saintly mother Kat and abusive step-cop Larry. Knows undocumented truth gets called gossip.</p>
+                        <p class="char-detail"><strong>Motto:</strong> <em>"People lie. Bodies don't. Paperwork tries, but it's bad at it."</em></p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <img src="art/char_teepop.png" alt="Henry Teepop Barnett">
+                        <div class="char-tag">Partner</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Henry "Teepop" Barnett</h3>
+                        <p class="char-title-desc">Ecosystem Operator / Healthcare Lawyer</p>
+                        <hr>
+                        <p class="char-detail"><strong>Support:</strong> Brick-house build, patterned shirts, supports Brooke's logic, never overshadows or rescues.</p>
+                        <p class="char-detail"><strong>Tech Reach:</strong> Connects her to water drones, whiteboards, GPS logs, legal loopholes, and waterproof tech.</p>
+                        <p class="char-detail"><strong>Dynamic:</strong> <em>"You look dangerous. I packed your gloves, charged your flashlight, and checked the back exit. I love you."</em></p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <img src="art/char_rena.png" alt="Miss Rena Hebert">
+                        <div class="char-tag">Mentor</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Miss Rena Hebert</h3>
+                        <p class="char-title-desc">Forensic Elder & Moral Anchor</p>
+                        <hr>
+                        <p class="char-detail"><strong>Presence:</strong> Classy Southern Black woman, mid-60s, well-pressed green overalls. Quiet, heavy authority.</p>
+                        <p class="char-detail"><strong>Function:</strong> Volleyball coach at Crowflies Catholic. Taught Brooke: <em>"Instinct is a bell. Evidence is the door you open after you hear it."</em></p>
+                        <p class="char-detail"><strong>Personal Arc:</strong> Old case history that she never let go, which converges in the season's climax.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <div class="fallback-char-img"><i class="ph-bold ph-user-circle"></i></div>
+                        <div class="char-tag">Suspect</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Crystal Mouton</h3>
+                        <p class="char-title-desc">Park Manager & Self-Crowned HOA Queen</p>
+                        <hr>
+                        <p class="char-detail"><strong>Optics:</strong> Velvet scrunchie, bedazzled glasses on a chain, monogrammed clipboard, athletic manager styling.</p>
+                        <p class="char-detail"><strong>Motto:</strong> <em>"Standards don't lower themselves."</em></p>
+                        <p class="char-detail"><strong>Motivation:</strong> Protecting her Cove empire at any cost; has a quiet, compromised contract linking her to the land deal.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <div class="fallback-char-img"><i class="ph-bold ph-wine"></i></div>
+                        <div class="char-tag">Suspect / Gossip</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Tammy Beaumont</h3>
+                        <p class="char-title-desc">Bathtub-Wine Vintner</p>
+                        <hr>
+                        <p class="char-detail"><strong>Style:</strong> Leopard print, giant gold hoops, package-opening acrylics, turquoise accents.</p>
+                        <p class="char-detail"><strong>Motto:</strong> <em>"Trades secrets for favors."</em></p>
+                        <p class="char-detail"><strong>Investigation role:</strong> Bathtub wine operations mean she knows exactly whose secrets are buried where. Flat, knowing eyes.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <div class="fallback-char-img"><i class="ph-bold ph-security-camera"></i></div>
+                        <div class="char-tag">Suspect / Comedy</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Dale Scruggs</h3>
+                        <p class="char-title-desc">Director of Perimeter Security</p>
+                        <hr>
+                        <p class="char-detail"><strong>Armor:</strong> Tactical vest over Hawaiian shirt, Oakleys on forehead indoors, golf cart, 14 president-named cameras.</p>
+                        <p class="char-detail"><strong>Behavior:</strong> <em>"We don't call 911. We call Dale."</em> Stringing caution tape around tricycles and propane tanks.</p>
+                        <p class="char-detail"><strong>Role:</strong> Worsens scene perimeters; provides red-herring trail-cam videos; tries to leverage deals.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <img src="art/char_sonia.png" alt="Sonia Barnett">
+                        <div class="char-tag">Daughter</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Sonia Barnett</h3>
+                        <p class="char-title-desc">Middle Daughter / Volleyball Star</p>
+                        <hr>
+                        <p class="char-detail"><strong>Stats:</strong> Plays #8 for Crowflies Crusaders. Athletic, steady, shares Rena's calm.</p>
+                        <p class="char-detail"><strong>Insight:</strong> <em>"You can tell when grown-ups are scared. They start talking around the truth."</em></p>
+                      </div>
+                    </div>
+                    
+                    <div class="character-card glassmorphism">
+                      <div class="char-image-container">
+                        <img src="art/char_alix.png" alt="Alix Kat Barnett">
+                        <div class="char-tag">Daughter</div>
+                      </div>
+                      <div class="char-info">
+                        <h3>Alix Kat Barnett</h3>
+                        <p class="char-title-desc">Youngest Daughter / Seahawks Catalyst</p>
+                        <hr>
+                        <p class="char-detail"><strong>Stats:</strong> Seahawk #13. "Chaos with a compass". Overhears everything, blurts out truths, named after grandmother Kat.</p>
+                        <p class="char-detail"><strong>Insight:</strong> <em>"I'm not trying to be nosy, Mom. I'm just trying to help!"</em></p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+                <div class="bible-tab-content" id="bible-setting">
+                  <div class="setting-layout">
+                    <div class="setting-text">
+                      <h3>Crystal's Cove Mobile Home Community</h3>
+                      <p>Established in 1972, this Acadiana bayou trailer park lost the "L" on its main sign, welcoming visitors with: <strong>"uxury Living at Affordable Prices."</strong> Residents treat it like a premium luxury resort. It features a clubhouse that is a double-wide with a disco ball, and amenities consisting of an above-ground pool and an orange soda vending machine.</p>
+                      
+                      <h4>Key Settings Mapping</h4>
+                      <ul>
+                        <li><strong>Lot 5 (Bobby's Trailer)</strong>: The heart of the mystery. Dripping AC unit, neat gnome row with a clean gap, truck parked crooked to block sightlines.</li>
+                        <li><strong>The Bayou Treeline</strong>: Enclosing the Cove in shadows. Survey stakes, disturbed earth, and consolidated properties.</li>
+                        <li><strong>Da Berry</strong>: Coroner archives and parish offices where McMurrary operates.</li>
+                        <li><strong>Eret</strong>: Brooke's hometown, a source of memories and historical records.</li>
+                      </ul>
+                    </div>
+                    <div class="interactive-map glassmorphism">
+                      <div class="map-title"><i class="ph-bold ph-map-trifold"></i> Crystal's Cove Layout Map</div>
+                      <div class="map-grid">
+                        <div class="map-node sign" title="UXURY LIVING Entrance Sign">Gate Sign</div>
+                        <div class="map-node lot5 active" title="Lot 5 - Bobby Boudreaux (Crime Scene)">Lot 5</div>
+                        <div class="map-node clubhouse" title="Cove Double-Wide Clubhouse">Clubhouse</div>
+                        <div class="map-node pool" title="Above-ground Pool">Pool</div>
+                        <div class="map-node ricky" title="Ricky's Workshop">Lot 12</div>
+                        <div class="map-node bayou" title="Deep swamp bayou boundary">Bayou</div>
+                      </div>
+                      <div class="map-legend">
+                        <span><span class="legend-color active"></span> Lot 5 (Inciting Incident)</span>
+                        <span><span class="legend-color general"></span> Amenity/Clubhouse</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bible-tab-content" id="bible-rules">
+                  <div class="guardrails-list">
+                    <h3><i class="ph-bold ph-shield-warning"></i> Do-Not-Drift Consistency Rules</h3>
+                    <p class="rules-subtitle">These are the locked canonical guidelines. Writing any draft that violates these is strictly forbidden.</p>
+                    
+                    <div class="rules-grid">
+                      <div class="rule-box warning">
+                        <h4>1. Bobby Boudreaux</h4>
+                        <p>Missing resident's name is <strong>Bobby Boudreaux</strong>. Never refer to him as <em>"Doc Bourbon"</em>.</p>
+                      </div>
+                      <div class="rule-box warning">
+                        <h4>2. The Name "Cricket"</h4>
+                        <p><strong>Cricket</strong> is the gray terrier dog ONLY. No human character may ever share or use this name (Sugar was renamed from Cricket McCoy to Sugar McCoy to resolve this).</p>
+                      </div>
+                      <div class="rule-box warning">
+                        <h4>3. Louisiana Crawfish</h4>
+                        <p>Setting is Acadiana, Louisiana. The community feast is a <strong>Crawfish Boil</strong>, never a <em>lobster boil</em>.</p>
+                      </div>
+                      <div class="rule-box warning">
+                        <h4>4. Brooke Barnett is Boss</h4>
+                        <p>Brooke is the primary investigator and makes all final decisions. Teepop supplies drone/technical and legal help, but never rescues or overshadows her.</p>
+                      </div>
+                      <div class="rule-box warning">
+                        <h4>5. Distinct Locations</h4>
+                        <p>Do not confuse places: <strong>Eret</strong> (backstory/town), <strong>Da Berry</strong> (coroner), <strong>Crystal's Cove</strong> (current home), <strong>Crowflies Catholic</strong> (volleyball school).</p>
+                      </div>
+                      <div class="rule-box warning">
+                        <h4>6. Trauma Handling</h4>
+                        <p>Trauma is treated with care. Brooke is evidence-led. Her mother Kat is a strong survivor (never weak), and stepfather Larry is a dangerous cop (never a cartoon).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Workspace Tab 2: Timeline & Beat Sheet -->
+            <div class="studio-subtab" id="timeline-section">
+              <div class="timeline-container">
+                <h2><i class="ph-bold ph-calendar"></i> Season Outline & Beat Sheet</h2>
+                <p class="timeline-intro">Explore the 15-chapter locked outline of Season One. Select a chapter node to view clues, cliffhangers, and narrative tasks.</p>
+                
+                <div class="timeline-flow">
+                  <!-- Chapter Timeline Nodes (Chapter 1 is locked, others scaffolded) -->
+                  <div class="timeline-node active" data-ch="1">
+                    <div class="node-circle">1</div>
+                    <div class="node-label">Welcome to Crystal's Cove</div>
+                    <span class="node-status locked">Locked</span>
+                  </div>
+                  <div class="timeline-node" data-ch="2">
+                    <div class="node-circle">2</div>
+                    <div class="node-label">False Leads</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="3">
+                    <div class="node-circle">3</div>
+                    <div class="node-label">Trailer Tricks</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="4">
+                    <div class="node-circle">4</div>
+                    <div class="node-label">Bayou Secrets</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="5">
+                    <div class="node-circle">5</div>
+                    <div class="node-label">Confrontation</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="6">
+                    <div class="node-circle">6</div>
+                    <div class="node-label">The Blueprint</div>
+                    <span class="node-status midreveal">Midseason</span>
+                  </div>
+                  <div class="timeline-node" data-ch="7">
+                    <div class="node-circle">7</div>
+                    <div class="node-label">Lot Lines</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="8">
+                    <div class="node-circle">8</div>
+                    <div class="node-label">Inside Job</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="9">
+                    <div class="node-circle">9</div>
+                    <div class="node-label">High Stakes</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="10">
+                    <div class="node-circle">10</div>
+                    <div class="node-label">Double-Cross</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="11">
+                    <div class="node-circle">11</div>
+                    <div class="node-label">The Trial</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="12">
+                    <div class="node-circle">12</div>
+                    <div class="node-label">Night of the Fireflies</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="13">
+                    <div class="node-circle">13</div>
+                    <div class="node-label">Flashbacks & Revelations</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="14">
+                    <div class="node-circle">14</div>
+                    <div class="node-label">Treasure Hunt & Lineage</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                  <div class="timeline-node" data-ch="15">
+                    <div class="node-circle">15</div>
+                    <div class="node-label">Coup & Resolution</div>
+                    <span class="node-status outline">Outline</span>
+                  </div>
+                </div>
+                
+                <div class="ch-details-box glassmorphism" id="ch-details-box">
+                  <!-- Updated dynamically -->
+                  <h3 id="detail-ch-title">Chapter 1 — Welcome to Crystal's Cove</h3>
+                  <p><strong>Purpose:</strong> <span id="detail-ch-purpose">Establish world, cast, voice, and the inciting disappearance.</span></p>
+                  
+                  <div class="detail-split-grid">
+                    <div class="detail-split-card">
+                      <h4>Narrative Beats</h4>
+                      <p id="detail-ch-beats">Open on Brooke's voiceover. Inciting alarm sounded by Sugar McCoy at dawn. Brooke snaps on blue gloves, shifts context from gossip to an actual case.</p>
+                    </div>
+                    <div class="detail-split-card">
+                      <h4>Clues & Markers</h4>
+                      <p id="detail-ch-clues">Crooked truck parked to hide line of sight, 11 of 12 gnomes (one missing leaving fresh dark divot), tabbed complaint binder on the table, bleach/lemon smell at the frame.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="detail-split-grid">
+                    <div class="detail-split-card">
+                      <h4>Misdirection</h4>
+                      <p id="detail-ch-misdirection">"Bobby owed money and skipped town." Everyone agrees it was a voluntary run.</p>
+                    </div>
+                    <div class="detail-split-card">
+                      <h4>Cliffhanger</h4>
+                      <p id="detail-ch-cliffhanger">Brooke opens the complaint binder and declares it is not noise: <em>"It's a man trying to be believed."</em></p>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Workspace Tab 3: Continuity Auditor -->
+            <div class="studio-subtab" id="auditor-section">
+              <div class="auditor-container">
+                <div class="auditor-info">
+                  <h2><i class="ph-bold ph-shield-check"></i> Continuity Guardrails Auditor</h2>
+                  <p>Paste a chapter draft or type here to audit naming continuity, setting compliance, and rule checks in real-time.</p>
+                </div>
+                
+                <div class="auditor-workspace">
+                  <div class="editor-pane">
+                    <textarea id="auditor-textarea" placeholder="Paste your markdown chapter prose here to run compliance validations...
+E.g. try typing 'Doc Bourbon skip town' or 'Joy Lee Cricket McCoy shouted' to trigger alarms."></textarea>
+                  </div>
+                  <div class="validation-pane glassmorphism">
+                    <div class="val-header">
+                      <span>Audit Diagnostic Center</span>
+                      <span class="audit-counter" id="audit-score">Score: 100/100</span>
+                    </div>
+                    
+                    <div class="val-status-bar" id="val-status-bar">
+                      <i class="ph-bold ph-check-circle"></i> Manuscript Compliant
+                    </div>
+                    
+                    <div class="val-errors-list" id="val-errors-list">
+                      <div class="val-empty-state">
+                        <i class="ph-bold ph-smiley-wink"></i>
+                        <p>No continuity drifts detected. Type in the left box to begin.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Workspace Tab 4: Compiler Console -->
+            <div class="studio-subtab" id="compiler-section">
+              <div class="compiler-container">
+                <div class="compiler-controls">
+                  <div class="compiler-info">
+                    <h2><i class="ph-bold ph-terminal-window"></i> Novel Compiler Console</h2>
+                    <p>Drive the backend layout compilation pipeline. Select your parameters and execute the build.</p>
+                  </div>
+                  
+                  <div class="compiler-params glassmorphism">
+                    <div class="param-row">
+                      <label>Target Chapters</label>
+                      <select id="compiler-ch-select">
+                        <option value="ch_01">Chapter 1 Draft (ch_01.md)</option>
+                        <option value="all">Compile All Drafts (ch_01 - ch_15)</option>
+                      </select>
+                    </div>
+                    <div class="param-row">
+                      <label>Words per Page</label>
+                      <input type="number" id="compiler-wpp" value="230" min="100" max="500">
+                    </div>
+                    <div class="param-row">
+                      <label>Image Embedding</label>
+                      <select id="compiler-embed">
+                        <option value="true">Base64 Inline (Single HTML)</option>
+                        <option value="false">Referenced paths (--link-images)</option>
+                      </select>
+                    </div>
+                    
+                    <button class="compiler-btn" id="run-compiler-btn">
+                      <i class="ph-bold ph-play"></i> Run Build Script
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="terminal-box">
+                  <div class="terminal-header">
+                    <span>bash - python3 build_graphic_novel_1.py</span>
+                    <button class="terminal-clear" id="terminal-clear-btn"><i class="ph-bold ph-trash"></i> Clear</button>
+                  </div>
+                  <div class="terminal-body" id="terminal-log">
+                    <span class="log-line system">--- Terminal Session Initialized ---</span>
+                    <span class="log-line system">Ready to compile digital graphic novel. Click 'Run Build Script' to execute.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- Client-side logic -->
+  <script src="index.js"></script>
+</body>
+</html>

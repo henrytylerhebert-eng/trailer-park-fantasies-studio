@@ -1,0 +1,143 @@
+Claude Code — Execution Prompt: Trailer Park Fantasies
+Copy everything in the block below into Claude Code (or your generation pipeline). It assumes intro.md, SERIES_BIBLE.md, and beat_sheet_15_chapters.md are in the working directory.
+
+
+
+You are the drafting engine for a 15-chapter, 150-page illustrated novel called
+
+TRAILER PARK FANTASIES. Your only job is to write the prose, page by page, in strict fidelity
+
+to an existing canon. You are NOT a co-creator of the premise — the story is already decided.
+
+STEP 1 — INGEST CANON (in this order, before writing anything):
+
+1. Read intro.md          — the distilled context. This frames everything.
+
+2. Read SERIES_BIBLE.md   — the SINGLE SOURCE OF TRUTH. If anything you write conflicts with it,
+
+                            the bible wins. Do not contradict it, ever.
+
+3. Read beat_sheet_15_chapters.md — the per-chapter map. Each chapter must hit its listed clues,
+
+                            honor its misdirection, land its character turn, and end on its
+
+                            cliffhanger.
+
+Confirm you have read all three by listing, in 5 bullets, the hard continuity rules you must never
+
+break (Bobby Boudreaux not "Doc Bourbon"; Cricket = the dog only; Sugar = first witness; crawfish
+
+not lobster; Brooke is the boss). Do not proceed until you've done this.
+
+STEP 2 — LOCK THE OPEN DECISION:
+
+The beat sheet's top callout names ONE open decision (Bobby alive vs. dead). Use the DEFAULT
+
+(Bobby alive) unless told otherwise in this prompt: __________ . State which you're using.
+
+STEP 3 — OUTPUT FORMAT (page-by-page graphic-novel prose):
+
+Write ONE file per chapter to chapters/ch_NN.md (zero-padded: ch_01.md … ch_15.md). Structure:
+
+    # Chapter N — <Exact Title From Beat Sheet>
+
+    ## PAGE 1
+
+    [ART: one-line panel/art direction — subject, framing, mood, trailer-chic palette]
+
+    <~200–230 words of prose: narration, action, dialogue. Cajun-inflected but readable.>
+
+    ## PAGE 2
+
+    [ART: ...]
+
+    <prose>
+
+    … through PAGE 10.
+
+Rules for the format:
+
+- ~10 pages per chapter, ~200–230 words/page, ~2,000–2,500 words/chapter total.
+
+- The [ART: …] line is a standalone line (it doubles as an image prompt for page_art and is
+
+  ignored by the build script, or convert to an HTML comment). Keep it to one vivid line.
+
+- Use "* * *" on its own line for in-chapter scene breaks (the build script renders these).
+
+- Dialogue carries the camp; narration carries the heart. Don't explain the joke.
+
+STEP 4 — VOICE & QUALITY BARS:
+
+- Tone = Southern-Gothic atmosphere + camp + genuine heart, in balance. Everyone thinks they're
+
+  fabulous; nobody knows they're absurd. Slow burn = the marriage deepening, not "will they."
+
+- Brooke leads; tech assists but never solves it for her; Rena = forensic/moral truth;
+
+  Teepop = legal/tech, never a rescuer; McMurrary = morally gray gateway.
+
+- Trauma is handled with care: it deepens Brooke, never defines her; Kat is a survivor (never
+
+  weak); Larry is dangerous but never cartoonish; no easy-justice or revenge punchlines.
+
+- Prose is 100% original. Chloe Walsh is a directional vibe only — never imitate or echo her text.
+
+- Plant clues fairly; pay off the beat-sheet clue list; do not introduce a NEW major character or
+
+  a solution element that isn't in the bible/beat sheet. If a scene seems to need one, STOP and
+
+  flag it instead of inventing it.
+
+STEP 5 — DRIFT CONTROL (do this every chapter):
+
+- Before writing each chapter, restate its beat-sheet line in one sentence.
+
+- After writing, append a short "— continuity notes —" block at the END of the chapter file listing
+
+  every new concrete fact you introduced (names, dates, places, objects, timeline points). Read the
+
+  previous chapters' continuity notes first so you never contradict an established fact. Maintain a
+
+  cumulative CONTINUITY.md if helpful.
+
+- Self-check against the beat sheet's continuity checklist. If you broke a rule, fix it before
+
+  moving on.
+
+STEP 6 — WORKFLOW (IMPORTANT — do not skip the checkpoint):
+
+>>> Generate CHAPTER 1 ONLY. Then STOP and wait for review. <<<
+
+Do not generate chapters 2–15 until Chapter 1 is approved. This is the quality-control gate: it
+
+verifies voice, page format, clue placement, and continuity discipline at small scale before
+
+committing to all 150 pages. After approval, generate the remaining chapters one at a time,
+
+reading prior continuity notes before each.
+
+When Chapter 1 is done: print the path (chapters/ch_01.md), a 3-line summary of what you wrote,
+
+and the continuity notes block, then stop and ask for the go-ahead.
+
+
+After generation — build the book
+Once chapters are approved, assemble the illustrated HTML with the existing pipeline:
+
+python3 build_graphic_novel.py \
+
+  --chapters chapters/ \
+
+  --art art/ \
+
+  --cover key_art.png \
+
+  --intro intro.md \
+
+  --page-art page_art/ \
+
+  --out trailer_park_fantasies.html
+
+(Art conventions the build script expects: art/cover.png or key_art.png for the cover, art/ornament_chNN.png at chapter openers, art/scene_break.png at "* * *", optional page_art/page_NNN.png for GTA-style page images. Images are base64-embedded by default for a single portable file; add --link-images to keep them external.)
+
