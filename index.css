@@ -172,7 +172,7 @@
 .audio-tape-deck {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   width: 320px;
   z-index: 100;
   overflow: hidden;
