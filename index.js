@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Contradictory receipt timestamp; missing tab in the binder (a page was removed).",
       misdirection: "Dale's trail-cam points at a drifter (red herring).",
       cliffhanger: "The removed page's tab heading is still legible: a parish lot-line filing.",
-      status: "outline"
+      status: "locked"
     },
     3: {
       title: "Ch. 3 — Trailer Tricks",
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Staged trailer layout; object found under trailer matches the land filing.",
       misdirection: "Suspicion swings toward Tammy or Dale.",
       cliffhanger: "The removed page referenced a specific lot line — and it isn't Bobby's lot.",
-      status: "outline"
+      status: "locked"
     },
     4: {
       title: "Ch. 4 — Bayou Secrets",
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Survey markers; shell company consolidating lots.",
       misdirection: "Looks like a generic real estate developer; human target hidden.",
       cliffhanger: "One of Bobby's parish complaints named a specific name.",
-      status: "outline"
+      status: "locked"
     },
     5: {
       title: "Ch. 5 — Confrontation",
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Confirmation that one complaint was quietly buried or acted on.",
       misdirection: "The stonewaller seems like the main architect (too clean).",
       cliffhanger: "An anonymous warning is delivered: 'Drop it. Some graves shouldn't be opened.'",
-      status: "outline"
+      status: "locked"
     },
     6: {
       title: "Ch. 6 — The Blueprint",
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "The plat map / blueprint itself.",
       misdirection: "Bobby skipped town over money.",
       cliffhanger: "Bobby didn't skip town. The scheme rests on an old parish death — an old coroner case.",
-      status: "midreveal"
+      status: "locked"
     },
     7: {
       title: "Ch. 7 — Lot Lines",
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "An old death ruled accidental that was actually a homicide.",
       misdirection: "McMurrary looks like the main mastermind.",
       cliffhanger: "The old coroner file quietly ties back to Miss Rena Hebert.",
-      status: "outline"
+      status: "locked"
     },
     8: {
       title: "Ch. 8 — Inside Job",
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Crystal's paperwork puts her at a transaction where she claimed she wasn't.",
       misdirection: "A sympathetic ally looks compromised.",
       cliffhanger: "Brooke works out exactly where the missing garden gnome's contents point.",
-      status: "outline"
+      status: "locked"
     },
     9: {
       title: "Ch. 9 — High Stakes",
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "The gnome marker location is located.",
       misdirection: "The pressure makes Brooke back down.",
       cliffhanger: "They recover the gnome's hidden contents.",
-      status: "outline"
+      status: "locked"
     },
     10: {
       title: "Ch. 10 — Double-Cross",
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Hard evidence linking the land grab to the coroner case and a present player.",
       misdirection: "Trusted ally was the killer (actually protecting).",
       cliffhanger: "The evidence implicates someone the reader didn't want it to.",
-      status: "outline"
+      status: "locked"
     },
     11: {
       title: "Ch. 11 — The Trial",
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Documented case becomes undeniable on its face.",
       misdirection: "DA immediately files charges.",
       cliffhanger: "A procedural twist threatens to bury the evidence and close the Cove.",
-      status: "outline"
+      status: "locked"
     },
     12: {
       title: "Ch. 12 — Night of the Fireflies",
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Physical confirmation of what happened the night of the crawfish boil.",
       misdirection: "Bobby's location is compromised.",
       cliffhanger: "The adversary makes a desperate, final, escalating move.",
-      status: "outline"
+      status: "locked"
     },
     13: {
       title: "Ch. 13 — Flashbacks & Revelations",
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "The full truth of the old death.",
       misdirection: "Larry is the main Season One architect.",
       cliffhanger: "Rena: 'I knew this would come back. I just prayed it wouldn't come through you.' One last piece is needed.",
-      status: "outline"
+      status: "locked"
     },
     14: {
       title: "Ch. 14 — Treasure Hunt & Lineage",
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "Complete chain of custody; the record is airtight.",
       misdirection: "The evidence cache was destroyed.",
       cliffhanger: "The final confrontation with the mastermind is set.",
-      status: "outline"
+      status: "locked"
     },
     15: {
       title: "Ch. 15 — Coup & Resolution",
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clues: "The corrected record is placed on the books.",
       misdirection: "All corruption in Louisiana is resolved.",
       cliffhanger: "A name on the consolidated plat doesn't fit — season two hook.",
-      status: "outline"
+      status: "locked"
     }
   };
 
@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 400);
 
       setTimeout(() => {
-        appendLogLine(`[info] Loading clean_template.html... Template parsed with 150 page placeholders (1-150)`, 'info');
+        appendLogLine(`[info] Loading graphic_novel.html... Template parsed with 170 page placeholders (1-170)`, 'info');
       }, 1000);
 
       setTimeout(() => {
@@ -516,15 +516,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3400);
 
       setTimeout(() => {
-        appendLogLine(`[success] Compilation complete: Filled 14/150 pages.`, 'success');
-        appendLogLine(`[success] File written successfully -> graphic_novel_final.html (639 KB)`, 'success');
+        appendLogLine(`[success] Compilation complete: Filled 167/170 pages.`, 'success');
+        appendLogLine(`[success] File written successfully -> graphic_novel_final.html (910 KB)`, 'success');
         
         // Reset button
         runBtn.classList.remove('running');
         runBtn.innerHTML = '<i class="ph-bold ph-play"></i> Run Build Script';
         
         // Refresh reader stats
-        document.getElementById('stats-total-pages').textContent = "14 / 150";
+        document.getElementById('stats-total-pages').textContent = "167 / 170";
         loadManuscript(); // reload in viewer
       }, 4200);
     });
@@ -541,19 +541,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // MANUSCRIPT LOADING & PARSING ENGINE
   // ==========================================
-  function loadManuscript() {
+  function loadManuscript(chapterNum = 1) {
+    const pad = chapterNum.toString().padStart(2, '0');
     const sheet = document.getElementById('book-sheet');
     
-    // Fetch ch_01.md directly from chapters folder!
-    fetch('chapters/ch_01.md')
+    // Fetch chapter directly from chapters folder!
+    fetch(`chapters/ch_${pad}.md`)
       .then(response => {
         if (!response.ok) {
-          throw new Error("Unable to fetch manuscript ch_01.md");
+          throw new Error(`Unable to fetch manuscript ch_${pad}.md`);
         }
         return response.text();
       })
       .then(mdText => {
-        parseManuscript(mdText);
+        parseManuscript(mdText, chapterNum);
         renderPage();
         updateControls();
       })
@@ -564,51 +565,55 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  function parseManuscript(text) {
+  function parseManuscript(text, chIdx = 1) {
     manuscriptPages = [];
+    const data = beatSheetData[chIdx];
     
-    // Add Cover Page (Page 1)
-    manuscriptPages.push({
-      kind: 'cover',
-      title: "Cover Page",
-      html: `
-        <div class="cover-wrapper">
-          <img src="art/key_art.png" class="cover-img" alt="Trailer Park Fantasies Cover">
-          <div class="chapter-opener">
-            <span class="ch-num">Written by Bug Barnett</span>
-            <h1 class="ch-title">Trailer Park Fantasies</h1>
-            <p style="text-align:center; font-family:var(--font-sans); color:#666; font-size:14px; text-indent:0;">
-              Every Lot Has a Secret.
+    // Add Cover Page (Page 1) - only for Chapter 1
+    if (chIdx === 1) {
+      manuscriptPages.push({
+        kind: 'cover',
+        title: "Cover Page",
+        html: `
+          <div class="cover-wrapper">
+            <img src="art/key_art.png" class="cover-img" alt="Trailer Park Fantasies Cover">
+            <div class="chapter-opener">
+              <span class="ch-num">Written by Bug Barnett</span>
+              <h1 class="ch-title">Trailer Park Fantasies</h1>
+              <p style="text-align:center; font-family:var(--font-sans); color:#666; font-size:14px; text-indent:0;">
+                Every Lot Has a Secret.
+              </p>
+            </div>
+          </div>
+        `
+      });
+
+      // Add Intro / Distilled Context Page (Page 2)
+      manuscriptPages.push({
+        kind: 'intro',
+        title: "Intro & Context",
+        html: `
+          <div class="intro-page">
+            <h2>Introduction & Context</h2>
+            <p>Welcome to <em>Trailer Park Fantasies</em>, a digital graphic novel set in a Southern-Gothic trailer park. Inspired by the emotional depth of slow-burn found-family storytelling and modern investigative methods, this project follows Brooke "Bug" Barnett as she corrects the parish record on the disappearance of neighbor Bobby Boudreaux.</p>
+            <p>This layout operates as your production environment. You can read locked manuscript chapters, explore the 15-chapter beat sheet, trace core characters, audit drafts in real-time, and compile final productions.</p>
+            <p style="text-align:center; margin-top:40px; font-weight:bold; font-family:var(--font-sans); color:var(--rose);">
+              " documentación es protección — truth belongs to the powerless first. "
             </p>
           </div>
-        </div>
-      `
-    });
-
-    // Add Intro / Distilled Context Page (Page 2)
-    manuscriptPages.push({
-      kind: 'intro',
-      title: "Intro & Context",
-      html: `
-        <div class="intro-page">
-          <h2>Introduction & Context</h2>
-          <p>Welcome to <em>Trailer Park Fantasies</em>, a digital graphic novel set in a Southern-Gothic trailer park. Inspired by the emotional depth of slow-burn found-family storytelling and modern investigative methods, this project follows Brooke "Bug" Barnett as she corrects the parish record on the disappearance of neighbor Bobby Boudreaux.</p>
-          <p>This layout operates as your production environment. You can read locked manuscript chapters, explore the 15-chapter beat sheet, trace core characters, audit drafts in real-time, and compile final productions.</p>
-          <p style="text-align:center; margin-top:40px; font-weight:bold; font-family:var(--font-sans); color:var(--rose);">
-            " documentación es protección — truth belongs to the powerless first. "
-          </p>
-        </div>
-      `
-    });
+        `
+      });
+    }
 
     // Add Chapter Title Opener (Page 3)
+    const titleWithoutChapter = data.title.replace(/Ch\.\s*\d+\s*—\s*/, '').replace(/Chapter\s*\d+\s*—\s*/, '');
     manuscriptPages.push({
       kind: 'chapter-title',
-      title: "Chapter 1 Opener",
+      title: `Chapter ${chIdx} Opener`,
       html: `
         <div class="chapter-opener">
-          <span class="ch-num">Chapter 1</span>
-          <h1 class="ch-title">Welcome to Crystal's Cove</h1>
+          <span class="ch-num">Chapter ${chIdx}</span>
+          <h1 class="ch-title">${escapeHtml(titleWithoutChapter)}</h1>
           <div style="text-align:center; font-family:var(--font-sans); color:#c49b5c; font-size:24px; margin-top:20px;">· · ·</div>
         </div>
       `
@@ -657,7 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    document.getElementById('stats-total-pages').textContent = `${manuscriptPages.length} / 150`;
+    document.getElementById('stats-total-pages').textContent = `${manuscriptPages.length} / 170`;
   }
 
   // ==========================================
@@ -837,35 +842,7 @@ She had banana pudding in one hand — she always has banana pudding, it is load
         btn.classList.add('active');
         
         const idx = parseInt(btn.getAttribute('data-ch-idx'));
-        if (idx === 1) {
-          currentPageIndex = 0; // return to cover
-          renderPage();
-          updateControls();
-        } else {
-          // Mock showing blank pages or scaffolds for other chapters
-          const data = beatSheetData[idx];
-          manuscriptPages = [
-            {
-              kind: 'story-scaffold',
-              html: `
-                <div class="chapter-opener">
-                  <span class="ch-num">Chapter ${idx} Scaffold</span>
-                  <h1 class="ch-title">${data.title.replace(/Ch\.\s*\d+\s*—\s*/, '')}</h1>
-                  <div style="background: rgba(212, 98, 122, 0.05); padding:20px; border-radius:6px; border:1px dashed var(--rose); margin-top:40px; font-family:var(--font-sans); color:var(--paper-ink);">
-                    <p style="font-weight:bold; margin-bottom:10px; text-indent:0;"><i class="ph-bold ph-calendar"></i> PRODUCTION BEAT SHEET SYNOPSIS:</p>
-                    <p style="font-size:13px; text-indent:0; line-height:1.6; text-align:left;"><strong>Purpose:</strong> ${data.purpose}</p>
-                    <p style="font-size:13px; text-indent:0; line-height:1.6; text-align:left; margin-top:8px;"><strong>Core Beats:</strong> ${data.beats}</p>
-                    <p style="font-size:13px; text-indent:0; line-height:1.6; text-align:left; margin-top:8px;"><strong>Clues to Plant:</strong> ${data.clues}</p>
-                    <p style="font-size:13px; text-indent:0; line-height:1.6; text-align:left; margin-top:8px; font-weight:bold; color:var(--rose);">Cliffhanger: ${data.cliffhanger}</p>
-                  </div>
-                </div>
-              `
-            }
-          ];
-          currentPageIndex = 0;
-          renderPage();
-          updateControls();
-        }
+        loadManuscript(idx);
       });
     });
   }
